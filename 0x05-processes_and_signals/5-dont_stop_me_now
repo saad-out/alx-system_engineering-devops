@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# This script stops a prorcess with kill command
+# shellcheck disable=SC2009
+pid=$(ps axu --forest | grep bash | grep 4-to_infinity_and_beyond | awk '{print $2}')
+kill "$pid"
