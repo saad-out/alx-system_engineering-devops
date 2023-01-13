@@ -1,6 +1,13 @@
 # Replace a line in file
+include stdlib
+
 file_line {'Turn_off_passwd_auth':
-path  => 'ssh_config',
-line  => '\tPasswordAuthentication no\n\tIdentityFile ~/.ssh/school',
-after => 'GSSAPIAuthentication yes'
+ensure => present,
+path   => '/etc/ssh/ssh_config',
+line   => '	PasswordAuthentication no'
+;
+'key_location':
+ensure => present,
+path   => '/etc/ssh/ssh_config',
+line   => '	IdentityFile ~/.ssh/school'
 }
