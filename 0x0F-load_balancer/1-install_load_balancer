@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# This script configures HAProxy 2.6 on a server
+# Configs: listen on port 80 & distrubte traffic between web-01 and web-02
+# using roundrobin algorithm
+apt-get update -y
+apt-get install --no-install-recommends software-properties-common -y
+add-apt-repository ppa:vbernat/haproxy-2.6 -y
+apt-get install haproxy=2.6.\* -y
+echo -e "\nfrontent myfrontend\n\tbind *:80\n\tdefault_backend myservers\n\nbackend myservers\n\tbalance roundrobin\n\tserver web-01 54.242.98.93:80\n\tserver web-02 35.168.3.68:80" >> /etc/haproxy/haproxy.cfg
+service haproxy restart
