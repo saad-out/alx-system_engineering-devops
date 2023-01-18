@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# This script configures Nginx on a server
+# Configs: listen on port 80, add HTTP custom header &
+# return 'Hello World!' at /
+apt-get update -y
+apt-get install nginx -y
+echo 'Hello World!' > /var/www/html/index.nginx-debian.html
+sed -i "/^\tlocation \/ {.*/a \\\t \tadd_header X-Served-By \$hostname;" /etc/nginx/sites-available/default
+service nginx restart
