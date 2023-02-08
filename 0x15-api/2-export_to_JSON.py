@@ -6,11 +6,23 @@ This script displays user's tasks using {JSON} Placeholder REST API
 
 def export_json(user, tasks):
     """
-    Export TODO list into csv file
+    Export TODO list into JSON file
     """
     import json
 
-    pass
+    infos = []
+    for task in tasks:
+        task_info = {
+            'task': task.get('title'),
+            'completed': task.get('completed'),
+            'username': user.get('username'),
+        }
+        infos.append(task_info)
+    content = {str(user.get('id')): infos}
+
+    file_name = "{}.json".format(user.get('id'))
+    with open(file_name, 'w', encoding='UTF8') as f:
+        json.dump(content, f)
 
 
 def main():
@@ -27,7 +39,7 @@ def main():
     todos = requests.get('https://jsonplaceholder.typicode.com/todos' +
                          '?userId={}'.format(user_id))
 
-    export_csv(user.json(), todos.json())
+    export_json(user.json(), todos.json())
 
 
 if __name__ == '__main__':
