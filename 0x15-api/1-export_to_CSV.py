@@ -21,7 +21,7 @@ def export_csv(user, tasks):
 
 def main():
     """
-    Returns information about TODO list progress of given employee ID
+    Gather all tasks of an employee based on ID in CSV format
     using a REST API
     """
     import requests
