@@ -1,39 +1,29 @@
 #!/usr/bin/python3
-"""Request employee ID from API
+"""
+This script displays user's TODO list using {JSON} Placeholder REST API
 """
 
-import csv
-import requests
-from sys import argv
 
-if __name__ == "__main__":
+def main():
+    """
+    Returns information about TODO list progress of given employee ID
+    using a REST API
+    """
+    import requests
+    import sys
 
-    def make_request(resource, param=None):
-        """Retrieve user from API
-        """
-        url = 'https://jsonplaceholder.typicode.com/'
-        url += resource
-        if param:
-            url += ('?' + param[0] + '=' + param[1])
+    user_id = int(sys.argv[1])
+    user = requests.get('https://jsonplaceholder.typicode.com/users/' +
+                        '{}'.format(user_id))
+    todos = requests.get('https://jsonplaceholder.typicode.com/todos' +
+                         '?userId={}'.format(user_id))
 
-        # make request
-        r = requests.get(url)
+    done = [task for task in todos.json() if task.get('completed', False)]
+    print("Employee {} is done with tasks".format(user.json().get('name')) +
+          "({}/{}):".format(len(done), len(todos.json())))
+    for task in done:
+        print("\t {}".format(task.get('title')))
 
-        # extract json response
-        r = r.json()
-        return r
 
-    user = make_request('users', ('id', argv[1]))[0]
-    tasks = make_request('todos', ('userId', argv[1]))
-
-    csv_filename = argv[1] + '.csv'
-    with open(csv_filename, mode='w') as f:
-        writer = csv.writer(f,
-                            delimiter=',',
-                            quotechar='"',
-                            quoting=csv.QUOTE_ALL)
-        for task in tasks:
-            writer.writerow([user['id'],
-                            user['username'],
-                            task['completed'],
-                            task['title']])
+if __name__ == '__main__':
+    main()
