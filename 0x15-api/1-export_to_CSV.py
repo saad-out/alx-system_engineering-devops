@@ -10,7 +10,9 @@ def export_csv(user, tasks):
     """
     import csv
 
-    pass
+    file_name = "{}.csv".user.get('id')
+    with open(file_name, 'w', encoding='UTF8') as f:
+        pass
 
 
 def main():
