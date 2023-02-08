@@ -4,6 +4,10 @@ This script displays user's TODO list using {JSON} Placeholder REST API
 """
 
 
+def export_csv(user, tasks):
+    pass
+
+
 def main():
     """
     Returns information about TODO list progress of given employee ID
@@ -19,11 +23,7 @@ def main():
     todos = requests.get('https://jsonplaceholder.typicode.com/todos' +
                          '?userId={}'.format(user_id))
 
-    done = [task for task in todos.json() if task.get('completed', False)]
-    print("Employee {} is done with tasks".format(user.json().get('name')) +
-          "({}/{}):".format(len(done), len(todos.json())))
-    for task in done:
-        print("\t {}".format(task.get('title')))
+    export_csv(user, todos)
 
 
 if __name__ == '__main__':
