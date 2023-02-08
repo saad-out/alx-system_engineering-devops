@@ -1,17 +1,11 @@
 #!/usr/bin/python3
 """Request employee ID from API
 """
+import csv
+import requests
+import sys
 
-
-def main():
-    """
-    Returns all tasks owned by an employee based on ID in CSV format
-    using a REST API
-    """
-    import csv
-    import requests
-    import sys
-
+if __name__ == '__main__':
     user_id = int(sys.argv[1])
     user = requests.get('https://jsonplaceholder.typicode.com/users/' +
                         '{}'.format(user_id))
@@ -27,7 +21,3 @@ def main():
             writer.writerow(row)
             row.pop()
             row.pop()
-
-
-if __name__ == '__main__':
-    main()
