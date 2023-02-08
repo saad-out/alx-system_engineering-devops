@@ -7,14 +7,14 @@ into a JSON file
 
 def user_tasks(user, tasks):
     """
-    Export TODO list into JSON file
+    Returns dictionary of all tasks' info about a user
     """
     pass
 
 
 def main():
     """
-    Gather all tasks of an employee based on ID in JSON format
+    Gather all tasks of of all employees in JSON format
     using a REST API
     """
     import requests
