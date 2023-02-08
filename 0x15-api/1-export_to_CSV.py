@@ -8,6 +8,8 @@ def export_csv(user, tasks):
     """
     Export TODO list into csv file
     """
+    import csv
+
     pass
 
 
@@ -16,7 +18,6 @@ def main():
     Returns information about TODO list progress of given employee ID
     using a REST API
     """
-    import csv
     import requests
     import sys
 
