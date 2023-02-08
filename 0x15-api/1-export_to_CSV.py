@@ -13,7 +13,10 @@ def export_csv(user, tasks):
     file_name = "{}.csv".user.get('id')
     with open(file_name, 'w', encoding='UTF8') as f:
         writer = csv.writer(f, csv.QUOTE_ALL)
-        row = []
+        for task in tasks:
+            row = [user.get('id'), user.get('username'),
+                   task.get('completed'), task.get('title')]
+            writer.writerow(row)
 
 
 def main():
