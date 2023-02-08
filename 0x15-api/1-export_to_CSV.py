@@ -12,7 +12,8 @@ def export_csv(user, tasks):
 
     file_name = "{}.csv".user.get('id')
     with open(file_name, 'w', encoding='UTF8') as f:
-        pass
+        writer = csv.writer(f, csv.QUOTE_ALL)
+        row = []
 
 
 def main():
