@@ -25,6 +25,7 @@ def main():
     Gather all tasks of of all employees in JSON format
     using a REST API
     """
+    import json
     import requests
     import sys
 
@@ -35,6 +36,9 @@ def main():
         todos = requests.get('https://jsonplaceholder.typicode.com/todos' +
                              '?userId={}'.format(user.get('id')))
         content[str(user.get('id'))] = user_tasks(user, todos.json())
+
+    with open("todo_all_employees.json", "w", encoding="UTF8") as f:
+        json.dump(content, f)
 
 
 if __name__ == '__main__':
