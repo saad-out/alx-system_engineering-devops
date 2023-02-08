@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This script displays user's TODO list using {JSON} Placeholder REST API
+This script displays user's tasks using {JSON} Placeholder REST API
 """
 
 
