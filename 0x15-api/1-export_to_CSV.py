@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """
-This script exports data gathered from {JSON} placeholder REST API
-in CSV format
+This script exports data from {JSON} placeholder REST API in CSV format
 """
 
 
@@ -32,5 +31,4 @@ def main():
 
 
 if __name__ == '__main__':
-    """ execute if not imported """
     main()
