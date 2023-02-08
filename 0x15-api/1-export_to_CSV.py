@@ -10,9 +10,9 @@ def export_csv(user, tasks):
     """
     import csv
 
-    file_name = "{}.csv".user.get('id')
+    file_name = "{}.csv".format(user.get('id'))
     with open(file_name, 'w', encoding='UTF8') as f:
-        writer = csv.writer(f, csv.QUOTE_ALL)
+        writer = csv.writer(f, quoting=csv.QUOTE_ALL)
         for task in tasks:
             row = [user.get('id'), user.get('username'),
                    task.get('completed'), task.get('title')]
