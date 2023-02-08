@@ -5,6 +5,9 @@ This script displays user's TODO list using {JSON} Placeholder REST API
 
 
 def export_csv(user, tasks):
+    """
+    Export TODO list into csv file
+    """
     pass
 
 
@@ -23,7 +26,7 @@ def main():
     todos = requests.get('https://jsonplaceholder.typicode.com/todos' +
                          '?userId={}'.format(user_id))
 
-    export_csv(user, todos)
+    export_csv(user.json(), todos.json())
 
 
 if __name__ == '__main__':
