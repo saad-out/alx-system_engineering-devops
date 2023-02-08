@@ -20,11 +20,13 @@ def main():
     import requests
     import sys
 
-    user_id = int(sys.argv[1])
-    user = requests.get('https://jsonplaceholder.typicode.com/users/' +
-                        '{}'.format(user_id))
-    todos = requests.get('https://jsonplaceholder.typicode.com/todos' +
-                         '?userId={}'.format(user_id))
+    users = requests.get('https://jsonplaceholder.typicode.com/users/')
+    content = {}
+
+    for user in users.json():
+        todos = requests.get('https://jsonplaceholder.typicode.com/todos' +
+                             '?userId={}'.format(user.get('id')))
+        content[str(user.get('id'))] = [user_tasks(user, todos.json())]
 
 
 if __name__ == '__main__':
