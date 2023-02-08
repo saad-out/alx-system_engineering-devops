@@ -7,9 +7,17 @@ into a JSON file
 
 def user_tasks(user, tasks):
     """
-    Returns dictionary of all tasks' info about a user
+    Returns list of all tasks' info about a user
     """
-    pass
+    infos = []
+    for task in tasks:
+        task_info = {
+            'username': user.get('username'),
+            'task': task.get('title'),
+            'completed': task.get('completed'),
+        }
+        infos.append(task_info)
+    return infos
 
 
 def main():
@@ -26,7 +34,7 @@ def main():
     for user in users.json():
         todos = requests.get('https://jsonplaceholder.typicode.com/todos' +
                              '?userId={}'.format(user.get('id')))
-        content[str(user.get('id'))] = [user_tasks(user, todos.json())]
+        content[str(user.get('id'))] = user_tasks(user, todos.json())
 
 
 if __name__ == '__main__':
