@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""
-This script exports data from {JSON} placeholder REST API in CSV format
+"""Request employee ID from API
 """
 
 
