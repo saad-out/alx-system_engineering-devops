@@ -9,6 +9,7 @@ def main():
     Returns information about TODO list progress of given employee ID
     using a REST API
     """
+    import csv
     import requests
     import sys
 
