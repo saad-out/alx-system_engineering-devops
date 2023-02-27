@@ -30,8 +30,12 @@ def top_ten(subreddit):
     headers = {"user-agent": "Fake-Agent"}
     response = requests.get(url, headers=headers, allow_redirects=False)
     if response.status_code == 200:
+        counter = 0
         for post in response.json().get('data').get('children'):
             print(post.get('data').get('title'))
+            counter += 1
+            if counter >= 10:
+                break
         return_status = 1
     else:
         print("None")
