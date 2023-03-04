@@ -35,7 +35,7 @@ def count_words(subreddit, word_list, after='start', words_count=None):
         return 0
 
     if words_count is None:
-        words_count = {word.lower(): 0 for word in word_list}
+        words_count = {word: 0 for word in word_list}
 
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     headers = {"user-agent": "Fake-Agent"}
@@ -49,8 +49,8 @@ def count_words(subreddit, word_list, after='start', words_count=None):
     for post in response.json().get('data').get('children'):
         title = post.get('data').get('title')
         for word in title.split():
-            if word.lower() in words_count.keys():
-                words_count[word.lower()] += 1
+            if word in words_count.keys():
+                words_count[word] += 1
 
     after = response.json().get('data').get('after')
     if after:
@@ -58,7 +58,14 @@ def count_words(subreddit, word_list, after='start', words_count=None):
     else:
         words_count = dict(sorted(words_count.items(),
                                   key=lambda x: x[1], reverse=True))
+        copy = dict()
         for word, count in words_count.items():
+            if word.lower() in copy.keys():
+                copy[word.lower()] += count
+            else:
+                copy[word.lower()] = words_count[word]
+
+        for word, count in copy.items():
             if count != 0:
                 print(str(word) + ": " + str(count))
         return 1
