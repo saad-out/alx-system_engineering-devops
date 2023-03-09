@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 # Reload gunicorn instance service
-service gunicorn restart
+sudo systemctl restart gunicorn.service
